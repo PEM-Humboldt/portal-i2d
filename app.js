@@ -19,28 +19,50 @@
 
 var express = require('express'),
     app = express(),
-    routes = require('./routes');
+    serviceRoutes = require('./routes/service');
+    //logger = require('./logger');
+       
+// view engine setup
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
 
-//var logger = require('./logger');
+app.set('env', 'production');
+
 app.use(express.static(__dirname + '/public'));
 
+// Enable CORS 
 app.use( function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
-app.use('/', routes);
+app.use('/', serviceRoutes);
 
+/// error handlers
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        res.status(500).render('5xx', {
+            message: err.message,
+            error: err
+        });
+    });
+}
+
+// production error handler
+// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('¡Algo no funciona!');
+    res.status(500).render('5xx', {
+        message: err.message,
+        error: null
+    });
 });
 
+// Catch anything else
 app.use(function(req, res, next) {
-  res.status(404).send('¡Discúlpanos, no encontramos la página que solicitas!');
+  res.status(404).render('404', { url: req.originalUrl });
 });
 
-app.listen(3000, function(){
-    console.log('listening on port 3000');
-});
+module.exports = app;

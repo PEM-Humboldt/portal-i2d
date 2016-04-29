@@ -18,10 +18,8 @@
 */
 
 var express = require('express'),
-    //bodyParser = require('body-parser'),
-    //jsonParser = bodyParser.json(),
-    geoCatalogController = require('./controllers/geo_catalog_controller'),
-    bioCatalogController = require('./controllers/bio_catalog_controller'),
+    geoCatalogController = require('../controllers/service/geo_catalog_controller'),
+    bioCatalogController = require('../controllers/service/bio_catalog_controller'),
     router = express.Router();
 
 router.get( '/geoSearch', geoCatalogController.search ); 
