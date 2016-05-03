@@ -11,7 +11,7 @@ The web service paths are these:
 ### GET request examples: 
 
 * http://localhost:3000/geoSearch?q=antioquia
-* http://localhost:3000/geoSearch?id=420
+* http://localhost:3000/geoMetadata?id=420
 * http://localhost:3000/bioSearch?q=aves
 
 ### Tests:  

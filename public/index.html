@@ -1,10 +1,192 @@
-<!DOCTYPE html>	
-<html lang="en">	
-<head>	
-<meta charset="UTF-8">	
-    <title>Portal de la I2D del IAvH</title>	
-</head>	
-    <body>	
-        <h1>¡Hola mundo!</h1>
-    </body>	
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Portal I2D</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+    .banner {
+        height: 55px;
+        border-bottom: 5px solid #a9a6a6;
+    }
+    
+    .toTheRight {
+        float: right;
+    }
+    
+    .toTheLeft {
+        float: left;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+    
+    .footerLogo {
+        float: left;    
+    }    
+    
+    .carousel-inner img {
+        width: 80%; /* Set width to 80% */
+        margin: auto;
+        min-height:200px;
+    }
+  
+    .search-div {
+        border-top: 5px solid #679294;
+        border-bottom: 5px solid #679294;
+        min-height: 120px;
+        padding-top: 30px;
+        margin: 0px;
+    }
+    
+    .glyphicon {
+        vertical-align: middle;
+    }
+     
+    .btnText:after {
+        content: " Buscar";
+    }
+    
+    #searchInput{
+        background-color: #c7c7c7;
+        color: #fff;
+        font-weight: bold;
+    }
+  
+    /* Hide the carousel text when the screen is less than 600 pixels wide */
+    @media (max-width: 600px) {
+        .footerLogo {
+           float: none;
+        }
+        .carousel-caption {
+            display: none; 
+        }
+        .btnText:after {
+            content: "";
+        }      
+        .input-group-lg > .form-control {
+            padding: 10px;    
+        }
+    }
+    
+    @media (max-width: 360px) {
+        .carousel-inner img {
+            width: 100%;
+        }
+
+        .search-div {
+            border-top: 3px solid #679294;
+            border-bottom: 3px solid #679294;
+            min-height: 80px;
+            padding-top: 15px;
+        }
+    }
+  </style>
+</head>
+<body>
+
+
+<div class="banner">
+  <div class="toTheLeft">
+      <img src="img/humboldt.png" />
+  </div>
+  <div class="toTheRight">
+      <img src="img/logoi2d.png" />
+  </div>
+</div>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="img/ceiba.png" alt="Ceiba">
+        <div class="carousel-caption">
+          <h3>Ceiba</h3>
+          <p>Recursos biológicos</p>
+        </div>      
+      </div>
+
+      <div class="item">
+        <img src="img/geonetwork.png" alt="GeoNetwork">
+        <div class="carousel-caption">
+          <h3>GeoNetwork</h3>
+          <p>Metadatos geográficos</p>
+        </div>      
+      </div>
+
+      <div class="item">
+        <img src="img/visor.png" alt="Visor">
+        <div class="carousel-caption">
+          <h3>Visor</h3>
+          <p>Visor de datos geográficos</p>
+        </div>      
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+</div>
+
+  <!-- Search controls -->
+  <div class="row search-div">
+    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+      <div class="input-group input-group-lg">  
+        <input type="search" class="form-control" id="searchInput" placeholder="Inicie su búsqueda aquí">
+        <a href="#" class="btn btn-default input-group-addon btnText">
+          <span class="glyphicon glyphicon-search"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+<div class="container text-center">    
+  <hr class="featurette-divider">
+  
+  <div class="row">
+    <div class="col-sm-4">
+      <img src="http://placehold.it/150x80?text=CEIBA" class="img-responsive" style="width:100%" alt="Image">
+      <p>Current Project</p>
+    </div>
+    <div class="col-sm-4"> 
+      <img src="http://placehold.it/150x80?text=GEONETWORK" class="img-responsive" style="width:100%" alt="Image">
+      <p>Project 2</p>    
+    </div>
+    <div class="col-sm-4">
+      <div class="well">
+       <p>Some text..</p>
+      </div>
+      <div class="well">
+       <p>Some text..</p>
+      </div>
+    </div>
+  </div>
+</div><br>
+
+<footer class="container-fluid text-center">
+  <img class="footerLogo" src="img/logoi2d.png" />
+  <p>Portal Institucional de Datos del Instituto de Investigación en Recursos Biológicos Alexander von Humboldt.</p>
+</footer>
+
+</body>
+  <script src="js/jquery-1.12.3.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 </html>
+
