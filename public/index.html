@@ -145,40 +145,86 @@
     </a>
 </div>
 
-  <!-- Search controls -->
-  <div class="row search-div">
-    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
-      <div class="input-group input-group-lg">  
-        <input type="search" class="form-control" id="searchInput" placeholder="Inicie su búsqueda aquí">
-        <a href="#" class="btn btn-default input-group-addon btnText">
+<!-- Search controls -->
+<div class="row search-div">
+  <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+    <div class="input-group input-group-lg">  
+      <input type="search" class="form-control" id="searchInput" placeholder="Inicie su búsqueda aquí">
+      <span class="input-group-btn">
+        <button id="searchButton" onclick="doSearch('new')" type="button" class="btn btn-default btnText">
           <span class="glyphicon glyphicon-search"></span>
-        </a>
-      </div>
+        </button>
+      </span>
     </div>
   </div>
-
-<div class="container text-center">    
-  <hr class="featurette-divider">
   
-  <div class="row">
-    <div class="col-sm-4">
-      <img src="http://placehold.it/150x80?text=CEIBA" class="img-responsive" style="width:100%" alt="Image">
-      <p>Current Project</p>
-    </div>
-    <div class="col-sm-4"> 
-      <img src="http://placehold.it/150x80?text=GEONETWORK" class="img-responsive" style="width:100%" alt="Image">
-      <p>Project 2</p>    
-    </div>
-    <div class="col-sm-4">
-      <div class="well">
-       <p>Some text..</p>
+  <br /> <br /> <br />
+  <div class="container">    
+    <div class="row">    
+      <div id="bioResultsContainer" class="col-md-5 col-md-offset-1 col-sm-6">
+        <div id="bioResultsTitle"><h3>Resultados Ceiba</h3></div>
+   
+        <div id="bioResults">
+          	<div class="media">
+                <div class="media-left">
+                    <a href='http://i2d.humboldt.org.co/ceiba/resource.do?r=rrbb_colombia_peces_2015'>
+                        <img src="../images/avatar-tiny.jpg" class="media-object" alt="Sample Image">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <a href='http://i2d.humboldt.org.co/ceiba/resource.do?r=rrbb_colombia_peces_2015'>
+                    <h4 class="media-heading">Rasgos funcionales de peces dulceacuícolas de las macrocuencas hidrográficas de Colombia</h4>
+                    </a>
+                    <p><small>Base de datos de los rasgos funcionales de 445 especies de peces de agua dulce obtenidos de información secundaria, de las macrocuencas hidrográficas del Magdalena-Caribe, Pacífico, Amazonas y Orinoco.</small></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="bioResultsMoreBtn"><button class="btn btn-primary btn-block" onclick="doSearch('more')" >Cargar más resultados</button></div>
+
+      </div>  
+      <div id="geoResultsContainer" class="col-md-5 col-sm-6">    
+          <div id="geoResultsTitle"><h3>Resultados GeoNetwork</h3></div>
+  
+          <div id="geoResults">      
+             	<div class="media">
+                  <div class="media-left">
+                      <a href='http://geonetwork.humboldt.org.co/geonetwork/srv/spa/search?#|09f1f048-80d2-482d-8164-3c09b385567a'>
+                          <img width="64px" src="http://geonetwork.humboldt.org.co/geonetwork/srv/eng/resources.get?uuid=09f1f048-80d2-482d-8164-3c09b385567a&fname=Amenaza_Ros_de_Colombia.jpg" class="media-object" alt="Sample Image">
+                      </a>
+                  </div>
+                  <div class="media-body">
+                      <a href='http://geonetwork.humboldt.org.co/geonetwork/srv/spa/search?#|09f1f048-80d2-482d-8164-3c09b385567a'>
+                      <h4 class="media-heading">Número de especies amenazadas en los ríos de Colombia</h4>
+                      </a>
+                      <p><small>Esta capa corresponde a las áreas de los ríos principales con el número de especies amenzadas que presentan. Para su contrucción fue necesario:\n\n1. Construir bases de datos en formatos .dbf y .shp con los datos de especies amenazadas (con su respectiva categoría de amenaza) a partir del libro rojo de peces dulceacuícolas (Mojica et al. 2012), y asociándolas a la capa de drenaje doble de la cartografía base del IGAC (2014).\n\n2. Análizar los datos para su representación mediante cartografía temática a escala nacional.\n\nLa escala de la capa es 1:100.000 y provee los nombres de las zonas hidrográficas junto con los rangos (natural breaks) de número de especies amenazadas.</small></p>
+                  </div>
+              </div>
+          
+             	<div class="media">
+                  <div class="media-left">
+                      <a href='http://i2d.humboldt.org.co/ceiba/resource.do?r=rrbb_colombia_peces_2015'>
+                          <img src="../images/avatar-tiny.jpg" class="media-object" alt="Sample Image">
+                      </a>
+                  </div>
+                  <div class="media-body">
+                      <a href='http://i2d.humboldt.org.co/ceiba/resource.do?r=rrbb_colombia_peces_2015'>
+                      <h4 class="media-heading">Rasgos funcionales de peces dulceacuícolas de las macrocuencas hidrográficas de Colombia</h4>
+                      </a>
+                      <p><small>Base de datos de los rasgos funcionales de 445 especies de peces de agua dulce obtenidos de información secundaria, de las macrocuencas hidrográficas del Magdalena-Caribe, Pacífico, Amazonas y Orinoco.</small></p>
+                  </div>
+              </div>
+          </div>
+
+          <div id="geoResultsMoreBtn"><button class="btn btn-primary btn-block" onclick="doSearch('more')" >Cargar más resultados</button></div>
+          
       </div>
-      <div class="well">
-       <p>Some text..</p>
-      </div>
     </div>
-  </div>
-</div><br>
+
+  </div><br>
+
+  
+</div>
 
 <footer class="container-fluid text-center">
   <img class="footerLogo" src="img/logoi2d.png" />
@@ -188,5 +234,6 @@
 </body>
   <script src="js/jquery-1.12.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
+  <script src="js/app.js"></script>
 </html>
 

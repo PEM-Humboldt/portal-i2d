@@ -23,7 +23,9 @@ var httpRequest = require('request'),
     metadataUrl = 'http://geonetwork.humboldt.org.co/geonetwork/srv/eng/xml.metadata.get';
 
 exports.search = function(request, response) {
-  var q = request.query.q;
+  var q = request.query.q,
+      f = request.query.f || 1,
+      s = request.query.s || 5;
 
   if (q === undefined){
     response.status(500).send({statusCode:500, message: 'Parameter q is missing.'});
@@ -34,8 +36,8 @@ exports.search = function(request, response) {
   var xmlData = '<?xml version="1.0" encoding="UTF-8"?> \
     <request> \
       <any>' + q + '</any> \
-      <from>1</from> \
-      <to>5</to> \
+      <from>' + f + '</from> \
+      <to>' + (+f + +s-1) + '</to> \
       <fast>index</fast> \
     </request>';
   httpRequest({
@@ -67,12 +69,12 @@ exports.search = function(request, response) {
               retrievedCount = 0;
               
           if ( xmlDoc.root().name() == 'response' ){ // Root from GN response is called 'response'
-            retrievedCount = xmlDoc.root().attr('to').value();
             totalCount = xmlDoc.get('//summary').attr('count').value();
             idNodeArray = xmlDoc.find('//id');
             for ( var i=0, len=idNodeArray.length; i<len; i++){
               idArray.push( idNodeArray[i].text() );
             }
+            retrievedCount = idArray.length;
             response.status(200).send({query:q, metadataIds:idArray, retrieved:retrievedCount, total:totalCount});
           } else {
             response.status(400).send({statusCode:400, message: 'The response from the server does not correspond to a proper GN response.'});

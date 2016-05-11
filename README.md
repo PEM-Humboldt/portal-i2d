@@ -2,6 +2,10 @@
 
 ## Usage: 
 
+Access to main page for performing searches:
+
+* http://localhost:3000/
+
 The web service paths are these: 
 
 * http://localhost:3000/geoSearch               Full text search in GeoNetwork
@@ -10,9 +14,9 @@ The web service paths are these:
 
 ### GET request examples: 
 
-* http://localhost:3000/geoSearch?q=antioquia
+* http://localhost:3000/geoSearch?q=antioquia&f=1&s=5
 * http://localhost:3000/geoMetadata?id=420
-* http://localhost:3000/bioSearch?q=aves
+* http://localhost:3000/bioSearch?q=aves&f=0&s=5
 
 ### Tests:  
 

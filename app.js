@@ -26,7 +26,7 @@ var express = require('express'),
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.set('env', 'production');
+app.set('env', 'debug');
 
 app.use(express.static(__dirname + '/public'));
 

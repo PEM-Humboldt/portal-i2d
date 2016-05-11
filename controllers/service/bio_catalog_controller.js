@@ -25,33 +25,35 @@ var httpRequest = require('request'),
     });
 
 exports.search = function(request, response) {
-  var q = request.query.q;
+  var q = request.query.q,
+      f = request.query.f || 0,
+      s = request.query.s || 5;
 
   if (q === undefined){
     response.status(500).send({statusCode:500, message: 'Parameter q is missing.'});
     return;
   }
-
   console.log(" ***** POST (q: " + q + ") ***** ");
   client.searchTemplate( {
       index: 'ceiba',
       type: 'recurso',
-      body : {
+      body: {
           'id': 'dsl',
           'params': {
               'query': '"' + q + '"',
-              'from': 1,
-              'size': 5
+              'from': f,
+              'size': s
           }
       }
   } ).then( function( body ){
       var hits = body.hits.hits,
-          results = {},
+          results = [],
           retrievedCount = hits.length,
           totalCount = body.hits.total;
       for (var i=0; i<retrievedCount; i++){
-          results[hits[i]._id] = [hits[i]._source.resource.title,
-            hits[i]._source.resource.abstract];
+          results.push( { id: hits[i]._id,
+            title: hits[i]._source.resource.title,
+            abstract: hits[i]._source.resource.abstract } );
       }
       response.status(200).send({query:q, resources:results, retrieved:retrievedCount, total:totalCount});      
   }, function ( error ) {
