@@ -69,6 +69,12 @@ var $bioResults,
                             } else {
                                 $geoResMore.html('');
                             }
+                            
+                            // No results to retrieve, enable controls
+                            if (response.total == 0){
+                                $('#searchButton').prop('disabled', false);
+                                $('#searchInput').prop('disabled', false);
+                            }
                         }
                     } ).fail( function( jqXHR, textStatus, errorThrown ) {
                         // log the error to the console
@@ -77,8 +83,11 @@ var $bioResults,
                             jqXHR.status,
                             textStatus, 
                             errorThrown
-                    );
-                });
+                        );
+                        // Enable controls
+                        $('#searchButton').prop('disabled', false);
+                        $('#searchInput').prop('disabled', false);
+                    });
             }
             
             // Search in the Biological Catalog
