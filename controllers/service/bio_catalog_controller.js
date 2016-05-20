@@ -17,8 +17,8 @@
    along with this program. If not, see <http://www.gnu.org/licenses>
 */
 
-var httpRequest = require('request'),
-    searchUrl = 'http://localhost:9200/', 
+var config = require('../../config'),
+    searchUrl = config.bioSearchUrl, 
     elasticsearch = require('elasticsearch'),
     client = new elasticsearch.Client({
       host: searchUrl
@@ -27,13 +27,13 @@ var httpRequest = require('request'),
 exports.search = function(request, response) {
   var q = request.query.q,
       f = request.query.f || 0,
-      s = request.query.s || 5;
+      s = request.query.s || config.bioResultSize;
 
   if (q === undefined){
     response.status(500).send({statusCode:500, message: 'Parameter q is missing.'});
     return;
   }
-  console.log(" ***** POST (q: " + q + ") ***** ");
+  console.log(" ***** POST BIO (q: " + q + ") ***** ");
   client.searchTemplate( {
       index: 'ceiba',
       type: 'recurso',

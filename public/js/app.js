@@ -51,8 +51,8 @@ var $bioResults,
             
                 $.getJSON( '/geoSearch/', { 
                         q: text,
-                        f: geoTotalRes+1,
-                        s: 5 
+                        f: geoTotalRes+1
+                        // We don't set a size parameter to handle it from config.js
                     } ).done(function( response ) {
                         if ( response.metadataIds !== undefined ){
                             geoTotalRes += +response.retrieved;
@@ -97,8 +97,8 @@ var $bioResults,
             
                 $.getJSON( '/bioSearch/', { 
                         q: text, 
-                        f: bioTotalRes,
-                        s: 5
+                        f: bioTotalRes
+                        // We don't set a size parameter to handle it from config.js
                     } ).done(function( response ) {
                         if ( response.resources !== undefined ){
                             bioTotalRes += response.retrieved;                    

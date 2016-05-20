@@ -18,21 +18,22 @@
 */
 
 var httpRequest = require('request'),
+    config = require('../../config'),
     libxmljs = require('libxmljs'),
-    searchUrl = 'http://geonetwork.humboldt.org.co/geonetwork/srv/eng/xml.search',
-    metadataUrl = 'http://geonetwork.humboldt.org.co/geonetwork/srv/eng/xml.metadata.get';
+    searchUrl = config.geoSearchUrl, 
+    metadataUrl = config.geoMetadataUrl;
 
 exports.search = function(request, response) {
   var q = request.query.q,
       f = request.query.f || 1,
-      s = request.query.s || 5;
+      s = request.query.s || config.geoResultSize;
 
   if (q === undefined){
     response.status(500).send({statusCode:500, message: 'Parameter q is missing.'});
     return;
   }
 
-  console.log(" ***** POST (q: " + q + ") ***** ");
+  console.log(" ***** POST GEO (q: " + q + ") ***** ");
   var xmlData = '<?xml version="1.0" encoding="UTF-8"?> \
     <request> \
       <any>' + q + '</any> \

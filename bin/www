@@ -5,13 +5,14 @@
  */
 
 var app = require('../app'),
+    config = require('../config'),
     http = require('http'),
 
 /**
  * Get port from environment and store in Express.
  */
 
-    port = normalizePort(process.env.PORT || '3000');
+    port = normalizePort(process.env.PORT || config.port);
 app.set('port', port);
 
 /**
