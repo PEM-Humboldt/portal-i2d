@@ -18,6 +18,7 @@
 */
 
 var express = require('express'),
+    helmet = require('helmet'),
     app = express(),
     serviceRoutes = require('./routes/service');
     //logger = require('./logger');
@@ -26,7 +27,8 @@ var express = require('express'),
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-//app.set('env', 'debug');
+// Use Helmet to cover some security issues via HTTP headers
+app.use(helmet());  
 
 app.use(express.static(__dirname + '/public'));
 

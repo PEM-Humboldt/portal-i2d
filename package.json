@@ -1,6 +1,6 @@
 {
   "name": "portal-i2d",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Portal de la infraestructura Institucional de Datos del IAvH.",
   "main": "app.js",
   "repository": {
@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "express": "4.13.x",
+    "helmet": "2.1.x",
     "body-parser": "1.15.x",
     "request": "2.72.x",
     "testing": "0.2.x",
