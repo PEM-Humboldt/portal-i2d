@@ -52,8 +52,8 @@ exports.search = function(request, response) {
           totalCount = body.hits.total;
       for (var i=0; i<retrievedCount; i++){
           results.push( { id: hits[i]._id,
-            title: hits[i]._source.resource.title,
-            abstract: hits[i]._source.resource.abstract } );
+            title: hits[i]._source.title,
+            abstract: hits[i]._source.abstract } );
       }
       response.status(200).send({query:q, resources:results, retrieved:retrievedCount, total:totalCount});      
   }, function ( error ) {
