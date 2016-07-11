@@ -38,7 +38,7 @@ exports.search = function(request, response) {
       index: 'ceiba',
       type: 'recurso',
       body: {
-          'id': 'dsl',
+          'id': 'fts',
           'params': {
               'query': '"' + q + '"',
               'from': f,
