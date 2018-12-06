@@ -1,4 +1,4 @@
-/* 
+/*
    Portal web de la Infraestructura Institucional de Datos del IAvH
    Copyright (C) 2016 Germán Carrillo para el IAvH
    E-mail:   gcarrillo@linuxmail.org
@@ -18,7 +18,7 @@
 */
 
 var config = require('../../config'),
-    searchUrl = config.bioSearchUrl, 
+    searchUrl = config.bioSearchUrl,
     elasticsearch = require('elasticsearch'),
     client = new elasticsearch.Client({
       host: searchUrl
@@ -33,7 +33,7 @@ exports.search = function(request, response) {
     response.status(500).send({statusCode:500, message: 'Parameter q is missing.'});
     return;
   }
-  console.log(" ***** POST BIO (q: " + q + ") ***** ");
+
   client.searchTemplate( {
       index: 'ceiba',
       type: 'recurso',
@@ -55,7 +55,7 @@ exports.search = function(request, response) {
             title: hits[i]._source.title,
             abstract: hits[i]._source.abstract } );
       }
-      response.status(200).send({query:q, resources:results, retrieved:retrievedCount, total:totalCount});      
+      response.status(200).send({query:q, resources:results, retrieved:retrievedCount, total:totalCount});
   }, function ( error ) {
       console.trace(error.message);
       response.status(500).send({statusCode:500, message: "An error occurred during the HTTP request. "+error.message});

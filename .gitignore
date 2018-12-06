@@ -3,3 +3,4 @@ node_modules
 
 # Node.js log
 npm-debug.log
+logs
