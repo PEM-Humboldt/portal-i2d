@@ -33,7 +33,6 @@ exports.search = function(request, response) {
     return;
   }
 
-  console.log(" ***** POST GEO (q: " + q + ") ***** ");
   var xmlData = '<?xml version="1.0" encoding="UTF-8"?> \
     <request> \
       <any>' + q + '</any> \
@@ -100,21 +99,15 @@ exports.getMetadata = function(request, response) {
     return;
   }
 
-  console.log(" ***** POST (id: " + id + ") ***** ");
-  var xmlData = '<?xml version="1.0" encoding="UTF-8"?> \
-    <request> \
-      <id>' + id + '</id> \
-    </request>';
   httpRequest({
-    uri: metadataUrl,
-    method: "POST",
+    uri: `${metadataUrl}?id=${id}`,
+    method: "GET",
     timeout: 10000,
     followRedirect: true,
     maxRedirects: 2,
     headers: {
         "content-type": "application/xml",  // <-- Important!!!
-    },
-    body: xmlData
+    }
   }, function(error, res, body) {
     if (error){
       response.status(500).send({statusCode:500, message: "An error occurred during the HTTP request. "+error});
