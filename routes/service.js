@@ -1,7 +1,7 @@
-/* 
+/*
    Portal web de la Infraestructura Institucional de Datos del IAvH
    Copyright (C) 2016 Germán Carrillo para el IAvH
-   E-mail:   gcarrillo@linuxmail.org 
+   E-mail:   gcarrillo@linuxmail.org
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -17,14 +17,26 @@
    along with this program. If not, see <http://www.gnu.org/licenses>
 */
 
-var express = require('express'),
-    geoCatalogController = require('../controllers/service/geo_catalog_controller'),
-    bioCatalogController = require('../controllers/service/bio_catalog_controller'),
-    router = express.Router();
+var express = require('express');
+var logger = require('../util/logger');
+var geoCatalogController = require('../controllers/service/geo_catalog_controller');
+var bioCatalogController = require('../controllers/service/bio_catalog_controller');
 
-router.get( '/geoSearch', geoCatalogController.search ); 
-router.get( '/geoMetadata', geoCatalogController.getMetadata ); 
-router.get( '/bioSearch', bioCatalogController.search ); 
+var router = express.Router();
+router.use(function (req, res, next) {
+  if (['/geoSearch/', '/geoMetadata/', '/bioSearch/'].findIndex(e => req.path == e) !== -1) {
+    const param = req.query;
+    logger.info(`New request to ${req.path} with params: ${Object.keys(param)
+      .map(e => `${e}: ${param[e]}`)
+      .join(', ')}`
+    );
+  }
+  next();
+});
+
+router.get( '/geoSearch', geoCatalogController.search );
+router.get( '/geoMetadata', geoCatalogController.getMetadata );
+router.get( '/bioSearch', bioCatalogController.search );
 
 module.exports = router;
 

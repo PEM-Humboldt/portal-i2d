@@ -1,7 +1,7 @@
-/* 
+/*
    Portal web de la Infraestructura Institucional de Datos del IAvH
    Copyright (C) 2016 Germán Carrillo para el IAvH
-   E-mail:   gcarrillo@linuxmail.org  
+   E-mail:   gcarrillo@linuxmail.org
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 var httpRequest = require('request'),
     config = require('../../config'),
     libxmljs = require('libxmljs'),
-    searchUrl = config.geoSearchUrl, 
+    searchUrl = config.geoSearchUrl,
     metadataUrl = config.geoMetadataUrl;
 
 exports.search = function(request, response) {
@@ -33,7 +33,6 @@ exports.search = function(request, response) {
     return;
   }
 
-  console.log(" ***** POST GEO (q: " + q + ") ***** ");
   var xmlData = '<?xml version="1.0" encoding="UTF-8"?> \
     <request> \
       <any>' + q + '</any> \
@@ -41,6 +40,9 @@ exports.search = function(request, response) {
       <to>' + (+f + +s-1) + '</to> \
       <fast>index</fast> \
     </request>';
+
+  // TODO: Log searches (xml data)
+
   httpRequest({
     uri: searchUrl,
     method: "POST",
@@ -57,18 +59,18 @@ exports.search = function(request, response) {
     } else {
       if (res.statusCode == 404){
         response.status(404).send({statusCode:404, message: "The service is down, although the server responded. " + error});
-      } else if (res.statusCode == 400){  
-        response.status(400).send({statusCode:400, message: "There was a problem with the request. The server could not respond properly."});      
+      } else if (res.statusCode == 400){
+        response.status(400).send({statusCode:400, message: "There was a problem with the request. The server could not respond properly."});
       } else {
         // Validate proper response
         if(res.headers['content-type'].indexOf('xml') != -1){
 
-          var xmlDoc = libxmljs.parseXml( res.body ), 
+          var xmlDoc = libxmljs.parseXml( res.body ),
               idNodeArray = []
               idArray = [],
               totalCount = 0,
               retrievedCount = 0;
-              
+
           if ( xmlDoc.root().name() == 'response' ){ // Root from GN response is called 'response'
             totalCount = xmlDoc.get('//summary').attr('count').value();
             idNodeArray = xmlDoc.find('//id');
@@ -80,7 +82,7 @@ exports.search = function(request, response) {
           } else {
             response.status(400).send({statusCode:400, message: 'The response from the server does not correspond to a proper GN response.'});
           }
-          
+
         } else {
           response.status(400).send({statusCode:400, message: 'The service did not send a proper XML response.'});
         }
@@ -97,29 +99,23 @@ exports.getMetadata = function(request, response) {
     return;
   }
 
-  console.log(" ***** POST (id: " + id + ") ***** ");
-  var xmlData = '<?xml version="1.0" encoding="UTF-8"?> \
-    <request> \
-      <id>' + id + '</id> \
-    </request>';
   httpRequest({
-    uri: metadataUrl,
-    method: "POST",
+    uri: `${metadataUrl}?id=${id}`,
+    method: "GET",
     timeout: 10000,
     followRedirect: true,
     maxRedirects: 2,
     headers: {
         "content-type": "application/xml",  // <-- Important!!!
-    },
-    body: xmlData
+    }
   }, function(error, res, body) {
     if (error){
       response.status(500).send({statusCode:500, message: "An error occurred during the HTTP request. "+error});
     } else {
       if (res.statusCode == 404){
         response.status(404).send({statusCode:404, message: "The service is down, although the server responded. " + error});
-      } else if (res.statusCode == 400){  
-        response.status(400).send({statusCode:400, message: "There was a problem with the request. The server could not respond properly."});      
+      } else if (res.statusCode == 400){
+        response.status(400).send({statusCode:400, message: "There was a problem with the request. The server could not respond properly."});
       } else {
         // Validate proper response
         // UUID, Título, Título Alternativo, Abstract, Graphic
@@ -127,27 +123,27 @@ exports.getMetadata = function(request, response) {
 
           var xmlDoc = libxmljs.parseXml( res.body );
           if ( xmlDoc.root().name() == 'MD_Metadata' ){ // Root from GN response is called 'gmd:MD_Metadata'
-            var uuid = xmlDoc.get('//gmd:fileIdentifier/gco:CharacterString', 
+            var uuid = xmlDoc.get('//gmd:fileIdentifier/gco:CharacterString',
                 { gmd: 'http://www.isotc211.org/2005/gmd', gco: 'http://www.isotc211.org/2005/gco' }),
-              title = xmlDoc.get('//gmd:title/gco:CharacterString', 
+              title = xmlDoc.get('//gmd:title/gco:CharacterString',
                 { gmd: 'http://www.isotc211.org/2005/gmd', gco: 'http://www.isotc211.org/2005/gco' }),
-              alternateTitle = xmlDoc.get('//gmd:alternateTitle/gco:CharacterString', 
+              alternateTitle = xmlDoc.get('//gmd:alternateTitle/gco:CharacterString',
                 { gmd: 'http://www.isotc211.org/2005/gmd', gco: 'http://www.isotc211.org/2005/gco' }),
-              abstract = xmlDoc.get('//gmd:abstract/gco:CharacterString', 
+              abstract = xmlDoc.get('//gmd:abstract/gco:CharacterString',
                 { gmd: 'http://www.isotc211.org/2005/gmd', gco: 'http://www.isotc211.org/2005/gco' }),
-              graphicUrl = xmlDoc.get('//gmd:MD_BrowseGraphic/gmd:fileName/gco:CharacterString', 
+              graphicUrl = xmlDoc.get('//gmd:MD_BrowseGraphic/gmd:fileName/gco:CharacterString',
                 { gmd: 'http://www.isotc211.org/2005/gmd', gco: 'http://www.isotc211.org/2005/gco' });
-            response.status(200).send({ id:id, 
-              uuid: uuid !== undefined ? uuid.text() : null, 
-              title: title !== undefined ? title.text() : null, 
-              alternateTitle: alternateTitle !== undefined ? alternateTitle.text() : null, 
-              abstract: abstract !== undefined ? abstract.text() : null, 
+            response.status(200).send({ id:id,
+              uuid: uuid !== undefined ? uuid.text() : null,
+              title: title !== undefined ? title.text() : null,
+              alternateTitle: alternateTitle !== undefined ? alternateTitle.text() : null,
+              abstract: abstract !== undefined ? abstract.text() : null,
               graphicUrl: graphicUrl !== undefined ? graphicUrl.text() : null
             });
           } else {
             response.status(400).send({statusCode:400, message: 'The response from the server does not correspond to a proper GN response.'});
           }
-          
+
         } else {
           response.status(400).send({statusCode:400, message: 'The service did not send a proper XML response.'});
         }
