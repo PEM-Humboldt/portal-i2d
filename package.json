@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "body-parser": "1.15.x",
-    "ejs": "2.4.x",
+    "ejs": "2.5.5",
     "elasticsearch": "11.x",
     "express": "4.13.x",
     "helmet": "2.1.x",
