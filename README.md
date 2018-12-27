@@ -15,7 +15,7 @@ run `npm start` to run the app in development mode
 Build the image with `docker build -t portal-i2d:0.7.0 .`
 
 ### Run the container
-Run a new container with `docker run --name portal-i2d -p 3000:3000 -d portal-i2d:0.7.0`
+Run a new container with `docker run --restart always --name portal-i2d -p 3000:3000 -d portal-i2d:0.7.0`
 
 ## Usage:
 
