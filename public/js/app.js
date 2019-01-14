@@ -167,7 +167,7 @@ getResultInHTML = function( type, data ){
       data.graphicUrl = 'img/logoCeiba.png';
   } else if ( type == 'geo'){
       data.graphicUrl = data.graphicUrl || "https://placeholdit.imgix.net/~text?txtsize=11&txt=GeoNetwork&w=64&h=80&txttrack=0";
-      data.url = "http://geonetwork.humboldt.org.co/geonetwork/srv/spa/search?#|" + data.uuid;
+      data.url = "http://geonetwork.humboldt.org.co/geonetwork/srv/spa/catalog.search#/metadata/" + data.uuid;
   }
   if (data.title === undefined || data.abstract === undefined ){
       console.log("WARNING: Couldn't parse object.", data);
