@@ -225,6 +225,13 @@ footer h5 {
     border-bottom: 2px solid #d9d9d9;
 }
 
+.results h3 {
+    color: #123e5d;
+    padding-left: 7px;
+    border-left: 2px solid #123e5d;
+    font-size: 1.25rem;
+}
+
 .media-body {
     padding-left: 15px;
 }
@@ -271,6 +278,15 @@ footer h5 {
     padding: 15px 0;
     margin-top: 30px;
     color: #ef5d32;
+    letter-spacing: 1px;
+}
+
+.line2 {
+    border-top: 2px solid #d9d9d9;
+    border-bottom: 2px solid #d9d9d9;
+    padding: 12px 23px 5px;
+    margin-top: 30px;
+    color: #123e5d;
     letter-spacing: 1px;
 }
 
@@ -323,8 +339,8 @@ ul.tabs {
 	float: left;
 	list-style: none;
 	height: 32px; /*--Set height of tabs--*/
-	border-bottom: 1px solid #999;
-	border-left: 1px solid #999;
+	border-bottom: 2px solid #d9d9d9;
+	border-left: 2px solid #d9d9d9;
 	width: 100%;
 }
 ul.tabs li {
@@ -333,7 +349,7 @@ ul.tabs li {
 	padding: 0;
 	height: 31px; /*--Subtract 1px from the height of the unordered list--*/
 	line-height: 31px; /*--Vertically aligns the text within the tab--*/
-	border: 1px solid #999;
+	border-right: 2px solid #d9d9d9;
 	border-left: none;
 	margin-bottom: -1px; /*--Pull the list item down 1px--*/
 	overflow: hidden;
@@ -349,9 +365,11 @@ ul.tabs li a {
 	border: 1px solid #fff; /*--Gives the bevel look with a 1px white border inside the list item--*/
 	outline: none;
 }
+
 ul.tabs li a:hover {
-	background: #ccc;
+	background: tomato;
 }
+
 html ul.tabs li.active, html ul.tabs li.active a:hover  { /*--Makes sure that the active tab does not
         listen to the hover properties--*/
 	background: #fff;
@@ -360,7 +378,7 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  { /*--Makes sure that th
 }
 
 .tab_container {
-	border: 1px solid #999;
+	border: 2px solid #d9d9d9;
 	border-top: none;
 	overflow: hidden;
 	clear: both;
