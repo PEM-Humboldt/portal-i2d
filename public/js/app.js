@@ -57,7 +57,7 @@ var $bioResults,
                         if ( response.metadataIds !== undefined ){
                             geoTotalRes += +response.retrieved;
                             // Update results panel
-                            $geoResTitle.html('<h3>Resultados GeoNetwork: ' + geoTotalRes + ' de ' + response.total + '</h3>');
+                            $geoResTitle.html('<h3>Resultados GeoNetwork<br>' + geoTotalRes + ' de ' + response.total + '</h3>');
 
                             response.metadataIds.forEach(function(item, idx){
                                 getMetadataById( item );
@@ -65,7 +65,7 @@ var $bioResults,
                             
                             // Is it possible to get more results?
                             if ( geoTotalRes < +response.total ){
-                                $geoResMore.html( '<button id="geoMoreButton" class="btn btn-primary btn-block" onclick="doSearch(\'moreGeo\',\'' + text + '\')" >Cargar más resultados</button>' );
+                                $geoResMore.html( '<button id="geoMoreButton" class="btn btn-primary btn-block" title="Cargar más resultados" onclick="doSearch(\'moreGeo\',\'' + text + '\')" ><i class="fa fa-plus"></i></button>' );
                             } else {
                                 $geoResMore.html('');
                             }
@@ -103,7 +103,7 @@ var $bioResults,
                         if ( response.resources !== undefined ){
                             bioTotalRes += response.retrieved;                    
                             //Update results panel 
-                            $bioResTitle.html('<h3>Resultados Ceiba: ' + bioTotalRes + ' de ' + response.total + '</h3>');
+                            $bioResTitle.html('<h3>Resultados Ceiba<br> ' + bioTotalRes + ' de ' + response.total + '</h3>');
                             
                             response.resources.forEach(function(item, idx){
                                //console.log( "Resource:", item.title );
@@ -112,7 +112,7 @@ var $bioResults,
                         
                             // Is it possible to get more results?
                             if ( bioTotalRes < +response.total ){
-                                $bioResMore.html( '<button id="bioMoreButton" class="btn btn-primary btn-block" onclick="doSearch(\'moreBio\',\'' + text + '\')" >Cargar más resultados</button>' );
+                                $bioResMore.html( '<button id="bioMoreButton" class="btn btn-primary btn-block" title="Cargar más resultados" onclick="doSearch(\'moreBio\',\'' + text + '\')" ><i class="fa fa-plus"></i></button>' );
                             } else {
                                 $bioResMore.html('');
                             }

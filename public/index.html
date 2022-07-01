@@ -4,130 +4,128 @@
   <title>Portal I2D</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css">
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,900italic,900,700italic,700,400italic,300italic,300,100italic,100' rel='stylesheet' type='text/css'>
-  <script src="js/jquery-1.12.3.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&family=Montserrat:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <script src="js/jquery-3.6.0.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/app.js"></script>
 </head>
 
 <body>
 
-  <div class="banner">
-        <img src="img/humboldt.png" />
-        <img src="img/i2dheader.png" />
-  </div>
+  <header class="container-fluid">
+    <div class="logoi2d">
+      <img src="img/logoi2d.png" />
+    </div>
+    <nav>
+      <a href="https://sites.google.com/humboldt.org.co/i2dwiki/" target="_blank">WIKI</a>
+      <a href="http://i2d.humboldt.org.co/ceiba/" target="_blank">CEIBA</a>
+      <a href="http://i2d.humboldt.org.co/visor-I2D/" target="_blank">VISOR</a>
+      <a href="http://geonetwork.humboldt.org.co" target="_blank">GEONETWORK</a>
+      <a href="http://ec2-23-23-47-203.compute-1.amazonaws.com:8080/" target="_blank">BIOCULTURAL</a>
+    </nav>
+  </header>
 
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol>
-
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner" role="listbox">
-        <div class="item active">
-          <a target="_blank" href="http://i2d.humboldt.org.co/ceiba">
-            <img src="img/ceiba.png" alt="Ceiba">
-<!--             <div class="carousel-caption">
-              <h3>Ceiba</h3>
-              <p>Recursos biológicos</p>
-            </div> -->
-          </a>      
-        </div>
-
-        <div class="item">      
-          <a target="_blank" href="http://geonetwork.humboldt.org.co">
-            <img src="img/geonetwork.png" alt="GeoNetwork">
-<!--             <div class="carousel-caption">
-              <h3>GeoNetwork</h3>
-              <p>Metadatos geográficos</p>
-            </div>     -->
-          </a>        
-        </div>
-
-        <div class="item">
-		  <a target="_blank" href="http://i2d.humboldt.org.co/visor-I2D/">
-          <img src="img/visor.png" alt="Visor">
-<!--           <div class="carousel-caption">
-            <h3>Visor</h3>
-            <p>Visor de datos geográficos</p>
-          </div>      
- -->      </a>
+  <div class="wrapper">
+    <div class="container">
+      <div class="row">
+        <h5 class="col-md-6 texthome">
+          Infraestructura donde se administran los <b>datos e información</b> sobre biodiversidad del Instituto Humboldt, con el fin de ser usados en procesos de <b>construcción del conocimiento.</b>
+        </h5>
       </div>
-
-      <!-- Left and right controls -->
-<!--       <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a> -->
-  </div>
-
-  <!-- Search controls -->
-  <div class="row search-div">
-    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
-      <div class="input-group input-group-lg">  
-        <input type="search" class="form-control" id="searchInput" placeholder="Inicie su búsqueda aquí">
-        <span class="input-group-btn">
-          <button id="searchButton" onclick="doSearch('new')" type="button" class="btn btn-default btnText">
-            <span class="glyphicon glyphicon-search"></span>
-          </button>
-        </span>
+      <div class="row search-div">
+        <div class="input-group">  
+          <input type="search" class="form-control" id="searchInput" placeholder="Inicie su búsqueda aquí">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="button" onclick="doSearch('new')">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-    
-    <br /> <br /> <br />
-    <!-- Results container -->
-    <div class="container">    
-      <div class="row">    
 
-        <!-- Results from biological catalog -->
-        <div id="bioResultsContainer" class="col-sm-6">
+    <div class="container results">
+      <div class="row">    
+        <!-- Results from biological catalog, class was col-sm-6 -->
+        <div id="bioResultsContainer" class="col-md-9">
           <div id="bioResultsTitle"></div>   
           <div id="bioResults"></div>
           <div id="bioResultsMoreBtn"></div>
         </div>  
+      </div>
 
+      <div class="row">  
         <!-- Results from geographic catalog -->
-        <div id="geoResultsContainer" class="col-sm-6">    
+        <div id="geoResultsContainer" class="col-md-9">    
             <div id="geoResultsTitle"></div>
             <div id="geoResults"></div>
             <div id="geoResultsMoreBtn"></div>
         </div>
-        
+
       </div>
+    </div>
 
-    </div><br>
+    <div class="line">
+    <h1>EXPLORA LA INFRAESTRUCTURA</h1>
+    </div>
 
-    
+    <div class="container">
+  
+      <div class="row flexcenter">
+        <div class="box">
+          <div class="logocont">
+            <a href="https://sites.google.com/humboldt.org.co/i2dwiki/" target="_blank"><img src="img/wiki.png"/></a>
+          </div>
+          <p>Guías, manuales y documentos de apoyo para llevar a cabo de manera eficiente los <b>procesos de consulta e incorporación</b> de datos e información en la infraestructura.</p>
+        </div>
+        <div class="box">
+          <div class="logocont">
+            <a href="http://i2d.humboldt.org.co/ceiba/" target="_blank"><img src="img/ceiba.png"/></a>
+          </div>
+          <p>Gestiona, administra y facilita el acceso en línea a los <b>datos biológicos y ecológicos</b> generados por el Instituto Humboldt, y disponibles en formato alfanumérico.</p>
+        </div>
+        <div class="box">
+          <div class="logocont">
+            <a href="http://i2d.humboldt.org.co/visor-I2D/" target="_blank"><img src="img/visor.png"/></a>
+          </div>
+          <p>Herramienta que permite <b>visualizar geográficamente</b> resultados de investigación institucional y conocer la biodiversidad y su estado a nivel municipal y departamental.</p>
+        </div>
+        <div class="box">
+          <div class="logocont">
+            <a href="http://geonetwork.humboldt.org.co" target="_blank"><img src="img/geonetwork.png"/></a>
+          </div>
+          <p>GeoNetwork hace disponibles los datos e información sobre biodiversidad en <b>formato geoespacial,</b> producida por el Instituto Humboldt.</p>
+        </div>
+        <div class="box">
+          <div class="logocont">
+            <a href="http://ec2-23-23-47-203.compute-1.amazonaws.com:8080/" target="_blank"><img src="img/biocultural.png"/></a>
+          </div>
+          <p>Catálogo de <b>datos y metadatos socioecológicos</b> generados por el Instituto Humboldt, bajo el estándar de Iniciativa de Documentación de Datos (DDI).</p>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <footer class="container-fluid text-center" id="footer">
-    <img class="footerLogo" src="img/logoi2d.png" />
-    <p>Portal Institucional de Datos del Instituto de Investigación en Recursos Biológicos Alexander von Humboldt.</p>
-  </footer>
+  <footer class="container-fluid">
+    <div class="logoiavh">
+      <img src="img/logohumboldt.png"/>
+      <h5>Instituto de investigación<br>de Recursos Biológicos<br><b>Alexander Von Humboldt<b></h5>
+    </div>
+    <div class="linksft">
+      <a href="mailto:i2d@humboldt.org.co">Contacto</a>
+      <a href="http://humboldt.org.co/es/contactenos" target="_blank">Solicitudes</a>
+    </div>
+  </footer> 
+
+  
+
 </body>
-  <!-- <script>
-    if($(document.body).height() < $(window).height()){
-      $('#footer').css({
-          position: 'absolute',
-          top:  ( $(window).scrollTop() + $(window).height()
-                - $("#footer").height() ) + "px",
-          width: "95%"
-      });
-    } else {
-        $('#footer').css({
-            position: 'static'
-        });
-    }   
-  </script> -->
 
 </html>
-
