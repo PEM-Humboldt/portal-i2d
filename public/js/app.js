@@ -26,6 +26,12 @@ $(document).ready(function(){
 		$(activeTab).fadeIn(); //Fade in the active ID content
 		return false;
 	});
+
+    $('input[type=search]').on('search', function () {
+        if(bioTotalRes || geoTotalRes || bioTotalRes == 0 || geoTotalRes == 0) {
+            $(".results").hide();
+        }
+    });
 });
 
 var $bioResults,
