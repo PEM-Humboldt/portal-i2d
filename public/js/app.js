@@ -76,7 +76,7 @@ var $bioResults,
                         if ( response.metadataIds !== undefined ){
                             geoTotalRes += +response.retrieved;
                             // Update results panel
-                            $geoResTitle.html('<h3>GeoNetwork<br>' + geoTotalRes + ' de ' + response.total + '</h3>');
+                            $geoResTitle.html('<h3>' + geoTotalRes + ' de ' + response.total + ' resultados</h3>');
 
                             response.metadataIds.forEach(function(item, idx){
                                 getMetadataById( item );
@@ -122,7 +122,7 @@ var $bioResults,
                         if ( response.resources !== undefined ){
                             bioTotalRes += response.retrieved;                    
                             //Update results panel 
-                            $bioResTitle.html('<h3>Ceiba<br> ' + bioTotalRes + ' de ' + response.total + '</h3>');
+                            $bioResTitle.html('<h3>' + bioTotalRes + ' de ' + response.total + ' resultados</h3>');
                             
                             response.resources.forEach(function(item, idx){
                                //console.log( "Resource:", item.title );
