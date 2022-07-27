@@ -55,7 +55,9 @@ var $bioResults,
         if ( text !== undefined && text.trim().length > 0 ){
             text = text.trim();
             
-            if ( type == 'new'){
+            if (type == 'new'){
+
+                $(".tab_content").hide(); //Hide all tab content
                 $(".results").show();
                 $("ul.tabs li:first").addClass("active").show(); //Activate first tab
 	            $(".tab_content:first").show(); //Show first tab content
@@ -70,7 +72,7 @@ var $bioResults,
             }
             
             // Search in the Geographic Catalog        
-            if (type != 'moreBio'){ // i.e., type is new or moreGeo
+            if (type == 'new' || type == 'moreGeo'){ // i.e., type is new or moreGeo
             
                 $('#geoMoreButton').prop('disabled', true); // Disable load more btn
             
@@ -116,7 +118,7 @@ var $bioResults,
             }
             
             // Search in the Biological Catalog
-            if (type != 'moreGeo'){ // i.e., type is new or moreBio
+            if (type == 'new' || type == 'moreBio'){ // i.e., type is new or moreBio
             
                 $('#bioMoreButton').prop('disabled', true); // Disable load more btn
             
@@ -146,6 +148,14 @@ var $bioResults,
                             $('#geoMoreButton').prop('disabled', false); // Enable load more btn
                             //$('#searchButton').prop('disabled', false);
                             //$('#searchInput').prop('disabled', false);
+
+                            // Show geonetwork tab
+                            if(bioTotalRes == 0) {
+                                $("ul.tabs li").removeClass("active"); //Remove any "active" class
+                                $("ul.tabs li:last").addClass("active").show(); //Add "active" class to selected tab
+                                $(".tab_content").hide(); //Hide all tab content
+                                $('#tab2').fadeIn(); //Fade in the active ID content
+                            }
                         }
                     } ).fail( function( jqXHR, textStatus, errorThrown ) {
                         // log the error to the console
