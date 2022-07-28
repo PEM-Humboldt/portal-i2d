@@ -41,13 +41,15 @@
       </div>
       <div class="row search-div">
         <div class="input-group">  
-          <input type="search" class="form-control" id="searchInput" placeholder="Inicie su búsqueda aquí">
+          <input type="text" class="form-control" id="searchInput" placeholder="Inicie su búsqueda aquí">
           <div class="input-group-append">
             <button class="btn btn-secondary" type="button" onclick="doSearch('new')">
               <i class="fa fa-search"></i>
             </button>
+            <button class="btn btn-secondary reset" type="button" onclick="doReset()">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
           </div>
-        </div>
       </div>
     </div>
 
