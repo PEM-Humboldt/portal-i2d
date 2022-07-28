@@ -14,6 +14,7 @@ $(document).ready(function(){
 
     //When page loads...
     $(".results").hide();
+    $(".reset").hide();
 
 	//On Click Event
 	$("ul.tabs li").click(function() {
@@ -42,7 +43,14 @@ var $bioResults,
     $geoResMore,
     bioTotalRes,
     geoTotalRes,
-    doSearch = function( type, searchText ){
+    doReset = function() {
+        if(bioTotalRes || geoTotalRes || bioTotalRes == 0 || geoTotalRes == 0) {
+            $('#searchInput').val("")
+            $(".results").hide();
+            $(".reset").hide();
+        }
+    },
+    doSearch = function( type, searchText ) {
         var text = searchText || $('#searchInput').val();
         if ( type == 'new'){
             bioTotalRes = 0;
@@ -61,6 +69,8 @@ var $bioResults,
                 $(".results").show();
                 $("ul.tabs li:first").addClass("active").show(); //Activate first tab
 	            $(".tab_content:first").show(); //Show first tab content
+                $(".reset").show();
+
 
                 // Initialize results panel
                 $bioResTitle.html('<h3>Resultados Ceiba</h3>');
