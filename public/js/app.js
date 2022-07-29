@@ -11,6 +11,28 @@ $(document).ready(function(){
             doSearch('new');
         }
     });
+
+    //When page loads...
+    $(".results").hide();
+    $(".reset").hide();
+
+	//On Click Event
+	$("ul.tabs li").click(function() {
+
+		$("ul.tabs li").removeClass("active"); //Remove any "active" class
+		$(this).addClass("active"); //Add "active" class to selected tab
+		$(".tab_content").hide(); //Hide all tab content
+
+		var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
+		$(activeTab).fadeIn(); //Fade in the active ID content
+		return false;
+	});
+
+    $('input[type=search]').on('search', function () {
+        if(bioTotalRes || geoTotalRes || bioTotalRes == 0 || geoTotalRes == 0) {
+            $(".results").hide();
+        }
+    });
 });
 
 var $bioResults,
@@ -21,7 +43,14 @@ var $bioResults,
     $geoResMore,
     bioTotalRes,
     geoTotalRes,
-    doSearch = function( type, searchText ){
+    doReset = function() {
+        if(bioTotalRes || geoTotalRes || bioTotalRes == 0 || geoTotalRes == 0) {
+            $('#searchInput').val("")
+            $(".results").hide();
+            $(".reset").hide();
+        }
+    },
+    doSearch = function( type, searchText ) {
         var text = searchText || $('#searchInput').val();
         if ( type == 'new'){
             bioTotalRes = 0;
@@ -34,7 +63,15 @@ var $bioResults,
         if ( text !== undefined && text.trim().length > 0 ){
             text = text.trim();
             
-            if ( type == 'new'){
+            if (type == 'new'){
+
+                $(".tab_content").hide(); //Hide all tab content
+                $(".results").show();
+                $("ul.tabs li:first").addClass("active").show(); //Activate first tab
+	            $(".tab_content:first").show(); //Show first tab content
+                $(".reset").show();
+
+
                 // Initialize results panel
                 $bioResTitle.html('<h3>Resultados Ceiba</h3>');
                 $geoResTitle.html('<h3>Resultados GeoNetwork</h3>');
@@ -45,7 +82,7 @@ var $bioResults,
             }
             
             // Search in the Geographic Catalog        
-            if (type != 'moreBio'){ // i.e., type is new or moreGeo
+            if (type == 'new' || type == 'moreGeo'){ // i.e., type is new or moreGeo
             
                 $('#geoMoreButton').prop('disabled', true); // Disable load more btn
             
@@ -57,7 +94,7 @@ var $bioResults,
                         if ( response.metadataIds !== undefined ){
                             geoTotalRes += +response.retrieved;
                             // Update results panel
-                            $geoResTitle.html('<h3>Resultados GeoNetwork: ' + geoTotalRes + ' de ' + response.total + '</h3>');
+                            $geoResTitle.html('<h3>' + geoTotalRes + ' de ' + response.total + ' resultados</h3>');
 
                             response.metadataIds.forEach(function(item, idx){
                                 getMetadataById( item );
@@ -65,7 +102,7 @@ var $bioResults,
                             
                             // Is it possible to get more results?
                             if ( geoTotalRes < +response.total ){
-                                $geoResMore.html( '<button id="geoMoreButton" class="btn btn-primary btn-block" onclick="doSearch(\'moreGeo\',\'' + text + '\')" >Cargar más resultados</button>' );
+                                $geoResMore.html( '<button id="geoMoreButton" class="btn btn-primary btn-block" title="Cargar más resultados" onclick="doSearch(\'moreGeo\',\'' + text + '\')" ><i class="fa fa-plus"></i></button>' );
                             } else {
                                 $geoResMore.html('');
                             }
@@ -91,7 +128,7 @@ var $bioResults,
             }
             
             // Search in the Biological Catalog
-            if (type != 'moreGeo'){ // i.e., type is new or moreBio
+            if (type == 'new' || type == 'moreBio'){ // i.e., type is new or moreBio
             
                 $('#bioMoreButton').prop('disabled', true); // Disable load more btn
             
@@ -103,7 +140,7 @@ var $bioResults,
                         if ( response.resources !== undefined ){
                             bioTotalRes += response.retrieved;                    
                             //Update results panel 
-                            $bioResTitle.html('<h3>Resultados Ceiba: ' + bioTotalRes + ' de ' + response.total + '</h3>');
+                            $bioResTitle.html('<h3>' + bioTotalRes + ' de ' + response.total + ' resultados</h3>');
                             
                             response.resources.forEach(function(item, idx){
                                //console.log( "Resource:", item.title );
@@ -112,7 +149,7 @@ var $bioResults,
                         
                             // Is it possible to get more results?
                             if ( bioTotalRes < +response.total ){
-                                $bioResMore.html( '<button id="bioMoreButton" class="btn btn-primary btn-block" onclick="doSearch(\'moreBio\',\'' + text + '\')" >Cargar más resultados</button>' );
+                                $bioResMore.html( '<button id="bioMoreButton" class="btn btn-primary btn-block" title="Cargar más resultados" onclick="doSearch(\'moreBio\',\'' + text + '\')" ><i class="fa fa-plus"></i></button>' );
                             } else {
                                 $bioResMore.html('');
                             }
@@ -121,6 +158,14 @@ var $bioResults,
                             $('#geoMoreButton').prop('disabled', false); // Enable load more btn
                             //$('#searchButton').prop('disabled', false);
                             //$('#searchInput').prop('disabled', false);
+
+                            // Show geonetwork tab
+                            if(bioTotalRes == 0) {
+                                $("ul.tabs li").removeClass("active"); //Remove any "active" class
+                                $("ul.tabs li:last").addClass("active").show(); //Add "active" class to selected tab
+                                $(".tab_content").hide(); //Hide all tab content
+                                $('#tab2').fadeIn(); //Fade in the active ID content
+                            }
                         }
                     } ).fail( function( jqXHR, textStatus, errorThrown ) {
                         // log the error to the console
