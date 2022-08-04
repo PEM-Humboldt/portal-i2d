@@ -1,9 +1,12 @@
 FROM node:18.3.0
 
-WORKDIR /app
-COPY package.json /app
+USER node
+RUN mkdir -p /home/node/app
+WORKDIR /home/node/app
+
+COPY package.json /home/node/app
 RUN npm install
-COPY . /app
+COPY --chown=node:node . /home/node/app
 
 CMD npm run start
-EXPOSE 4000
+EXPOSE 3000
