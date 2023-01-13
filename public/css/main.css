@@ -394,6 +394,23 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  { /*--Makes sure that th
 	font-size: 1.2em;
 }
 
+.div-disabled {
+    width: 260px;
+    height: 240px;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 10;
+    position: absolute;
+    display: inline-table;
+}
+
+.div-disabled p{
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 28px; 
+    font-weight: 900; color: #f29532;
+    display: table-cell; 
+    vertical-align: middle;
+}
+
 /* Hide nav */
 @media (max-width: 900px) {
 
