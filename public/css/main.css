@@ -337,11 +337,6 @@ footer h5 {
     margin-left: auto;
 }
 
-.disabled:hover {
-    background-color: #ec5353;
-    display: none;
-}
-
 ul.tabs {
 	margin: 0;
 	padding: 0;
