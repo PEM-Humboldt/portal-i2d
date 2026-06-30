@@ -1,4 +1,4 @@
-FROM node:18.3.0
+FROM public.ecr.aws/docker/library/node:18.3.0-alpine3.15
 
 USER node
 RUN mkdir -p /home/node/app
